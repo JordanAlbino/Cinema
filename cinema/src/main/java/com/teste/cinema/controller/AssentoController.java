@@ -6,17 +6,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.teste.cinema.model.Cliente;
-import com.teste.cinema.service.ClienteService;
+import com.teste.cinema.model.Assento;
+import com.teste.cinema.service.AssentoService;
 
 @RestController
-@RequestMapping("/cliente")
-public class ClienteController {
+@RequestMapping("/assento")
+public class AssentoController {
     @Autowired
-    private ClienteService clienteService;
+    private AssentoService assentoService;
 
     @PostMapping
-    public Cliente criarCliente(@RequestBody Cliente cliente){
-        return clienteService.salvarCliente(cliente);
+    public Assento criarAssento(@RequestBody Assento assento){
+        return assentoService.salvarAssento(assento);
     }
 }
