@@ -33,4 +33,5 @@ public class Assento {
     }
 
     
+    private Long id;
 }
