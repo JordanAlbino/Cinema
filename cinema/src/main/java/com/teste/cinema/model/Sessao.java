@@ -1,8 +1,9 @@
 package com.teste.cinema.model;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,49 +15,75 @@ import jakarta.persistence.ManyToOne;
 public class Sessao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long sessao;
+    private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "sala", nullable = false)
+    @JoinColumn(name = "sala_id_sala", nullable = false)
     private Sala sala;
 
     @ManyToOne
-    @JoinColumn(name = "filme", nullable = false)
     private Filme filme;
 
-    private LocalDate dia;
-    private LocalTime horario;
-    
-    public Long getSessao() {
-        return sessao;
+    @Column(nullable = false, columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    private LocalDateTime horario;
+
+    @Column(nullable = false)
+    private Integer assentosDisponiveis;
+
+    public Sessao() {
     }
-    public void setSessao(Long sessao) {
-        this.sessao = sessao;
+
+    public boolean reservarAssentos(Integer quantidade){
+        if (assentosDisponiveis >= quantidade) {
+            assentosDisponiveis -= quantidade;
+            return true;
+        }
+        return false;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Sala getSala() {
         return sala;
     }
+
     public void setSala(Sala sala) {
         this.sala = sala;
     }
+
     public Filme getFilme() {
         return filme;
     }
+
     public void setFilme(Filme filme) {
         this.filme = filme;
     }
-    public LocalDate getDia() {
-        return dia;
-    }
-    public void setDia(LocalDate dia) {
-        this.dia = dia;
-    }
-    public LocalTime getHorario() {
+
+    public LocalDateTime getHorario() {
         return horario;
     }
-    public void setHorario(LocalTime horario) {
+
+    public void setHorario(LocalDateTime horario) {
         this.horario = horario;
     }
+
+    public Integer getAssentosDisponiveis() {
+        return assentosDisponiveis;
+    }
+
+    public void setAssentosDisponiveis(Integer assentosDisponiveis) {
+        this.assentosDisponiveis = assentosDisponiveis;
+    }
+
+    
+
+    
 
     
 }

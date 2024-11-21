@@ -4,7 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -16,12 +15,23 @@ public class Ingresso {
     private Double preco;
 
     @ManyToOne
-    @JoinColumn(name = "sessao", nullable = false)
     private Sessao sessao;
 
     @ManyToOne
-    @JoinColumn(name = "assento", nullable = false)
-    private Assento assento;
+    private Cliente cliente;
+
+    public Ingresso(Sessao sessao, Cliente cliente, String tipo, double preco){
+        this.sessao = sessao;
+        this.cliente = cliente;
+        this.tipo = tipo;
+        this.preco = preco;
+    }
+
+    public Ingresso(){}
+
+    public double calcularPreco(){
+        return tipo.equalsIgnoreCase("Meia") ? preco * 0.5 : preco;
+    }
 
     public Long getId() {
         return id;
@@ -55,13 +65,15 @@ public class Ingresso {
         this.sessao = sessao;
     }
 
-    public Assento getAssento() {
-        return assento;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setAssento(Assento assento) {
-        this.assento = assento;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
+
+    
 
     
 }

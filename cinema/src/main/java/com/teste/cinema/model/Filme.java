@@ -16,6 +16,17 @@ public class Filme {
     private String genero;
     private String classificacao;
     
+    public Filme(String titulo, String sinopse, Integer duracao, String genero, String classificacao){
+        this.titulo = titulo;
+        this.sinopse = sinopse;
+        this.duracao = duracao;
+        this.genero = genero;
+        this.classificacao = classificacao;
+    }
+
+    public Filme(){
+    }
+
     public Long getId() {
         return id;
     }
